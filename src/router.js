@@ -3,6 +3,14 @@ const routers = [{
     meta: {
         title: ''
     },
-    component: (resolve) => require(['./views/index.vue'], resolve)
+    component: (resolve) => require(['./views/login.vue'], resolve)
+},
+{
+    path: '/home',
+    component: (resolve) => require(['./views/home.vue'], resolve)
+},
+{
+    path: '/component/table',
+    component: (resolve) => require(['./views/table.vue'], resolve)
 }];
 export default routers;

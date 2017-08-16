@@ -48,6 +48,7 @@
     export default {
         methods: {
             handleStart() {
+                this.utils.test;
                 this.$Modal.info({
                     title: 'Bravo',
                     content: 'Now, enjoy the convenience of iView.'
