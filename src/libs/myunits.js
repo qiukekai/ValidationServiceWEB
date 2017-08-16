@@ -6,32 +6,34 @@ let comp = {
 };
 
 comp.MyComponent = Vue.extend({  
-        template: '<Table width="auto" :columns="columns1" :data="data1"></Table>',
+        template: '<Table width="auto" :columns="columns1" :data="data1" @on-row-click="fn"></Table>',
+        props: {
+            data1: []
+        },
+        method: {
+            fn(data) {
+                console.info(data)
+            }
+        },
         data() {
             return {
                 columns1: [
                     {
                         title: 'SkillName',
-                        key: 'SkillName',
-                        width: 300,
-                        fixed: 'left'
+                        key: 'SkillName'
                     },
                     {
                         title: 'Status',
                         key: 'Status',
-                        width: 100,
-                        fixed: 'left',
                         className: 'status-column'
                     },
                     {
                         title: 'FinishTime',
-                        key: 'FinishTime',
-                        fixed: 'left'
+                        key: 'FinishTime'
                     },
                     {
                         title: 'MoreInformation',
                         key: 'MoreInformation',
-                        width: 150,
                         render: (h, params) => {
                             return h('div', [
                                 h('Button',{
@@ -57,7 +59,6 @@ comp.MyComponent = Vue.extend({
                     {
                         title: 'Operation',
                         key: 'Operation',
-                        width: 150,
                          render: (h, params) => {
                             return h('div', [
                                 h('Button', {

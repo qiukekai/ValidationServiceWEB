@@ -10,6 +10,11 @@ fs.open('./src/config/env.js', 'w', function(err, fd) {
     fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {});
 });
 
+const SERVER_HOST = {
+    target: 'http://extendcortana',
+    changeOrigin: true
+};
+
 module.exports = merge(webpackBaseConfig, {
     devtool: '#source-map',
     output: {
@@ -31,5 +36,11 @@ module.exports = merge(webpackBaseConfig, {
             template: './src/template/index.ejs',
             inject: false
         })
-    ]
+    ],
+    devServer: {
+        proxy: {
+            '/api': SERVER_HOST,
+            '/api': SERVER_HOST
+        }
+    }
 });

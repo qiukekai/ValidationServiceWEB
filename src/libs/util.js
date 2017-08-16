@@ -20,5 +20,18 @@ var aj = axios.create({
     timeout: 30000
 });
 
+util.base = {
+    success(response) {
+        console.log(response)
+        return response
+    },
+    error(err) {
+
+    },
+    get(url, option) {
+        return Vue.http.get(url, option)
+            .then(this.success, this.error)
+    }
+};
 
 export default util;
