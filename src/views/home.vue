@@ -127,7 +127,7 @@
                         <hr SIZE=15>
                         <br>
                             <p class="info-second-title"> Under Trigger Result: </p>
-                            <div> 
+                            <div>
                                 <ul id="example-1">
                                     <li v-for="item in info.Result.StabilityResults">
                                        <p class="tast-info">Utterance: {{ item.Utterance }} </p>
@@ -139,7 +139,7 @@
                                                 <p slot="content">
                                                     <ul id="example-1">
                                                         <li v-for="fail in item.FailureDatas">
-                                                            <p class="tast-info">TestTime: {{ fail.FailureTime }} </p>
+                                                            <p class="tast-info">FailTime: {{ fail.FailureTime }} </p>
                                                             <p class="tast-info">FailReason: {{ fail.FailReason }} </p>
                                                             <hr style="width:30%">
                                                         </li>

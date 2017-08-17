@@ -16,8 +16,8 @@ const SERVER_HOST = {
 };
 
 const CORP_HOST = {
-    target: 'http://localhost:9010',
-    // changeOrigin: true,
+    target: 'http://a7c61d42.ngrok.io',
+    changeOrigin: true,
 };
 
 module.exports = merge(webpackBaseConfig, {
