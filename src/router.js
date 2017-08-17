@@ -11,6 +11,6 @@ const routers = [{
 },
 {
     path: '/component/table',
-    component: (resolve) => require(['./views/table.vue'], resolve)
+    component: (resolve) => require(['./views/failTable.vue'], resolve)
 }];
 export default routers;

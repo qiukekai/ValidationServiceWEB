@@ -48,15 +48,27 @@
          font-weight:100;
          font-size: 12pt;
     }
-    .tast-info{
-         color: black;
-         font-size: 14pt;
-    }
     .title-font{
         color: black;
     }
     .title-font2{
         color: white;
+    }
+    .base-info-name {
+        float: left;
+        width: 20%;
+    }
+    .base-info-value {
+        float: left;
+        width: 80%;
+    }
+    .task-info-name{
+        display: inline-block;
+        width: 30%;
+    }
+    .task-info-value {
+        display: inline-block;
+        width: 70%;
     }
 </style>
 <template>
@@ -97,59 +109,52 @@
                     <Col span="12">
                     <div class="info-board">
                         <p class="info-first-title"> Information Board </p>
-                        <hr SIZE=15>
                         <br>
-                        <div> 
-                            <p class="base-info">JobId: {{info.Base.JobId}} </p>
-                            <p class="base-info">SkillId: {{info.Base.SkillId}} </p>
-                            <p class="base-info">SkillName: {{info.Base.SkillName}} </p>
-                            <p class="base-info">JobId: {{info.Base.JobId}} </p>
-                            <p class="base-info">Status: {{info.Base.Status}} </p>
-                            <p class="base-info">Locale: {{info.Base.Locale}} </p>
-                            <p class="base-info">CreateTime: {{info.Base.CreateTime}} </p>
+                        <div>
+                            <Collapse >
+                                <Panel name="1">
+                                    BaseInformation
+                                    <div class="base-info" slot="content"><div class="base-info-name">JobId:</div><div class="base-info-value">{{info.Base.JobId}}</div></div>
+                                    <div class="base-info" slot="content"><div class="base-info-name">SkillId:</div><div class="base-info-value">{{info.Base.SkillId}}</div></div>
+                                    <div class="base-info" slot="content"><div class="base-info-name">SkillName:</div><div class="base-info-value">{{info.Base.SkillName}}</div></div>
+                                    <div class="base-info" slot="content"><div class="base-info-name">JobId:</div><div class="base-info-value">{{info.Base.JobId}}</div></div>
+                                    <div class="base-info" slot="content"><div class="base-info-name">Status:</div><div class="base-info-value">{{info.Base.Status}}</div></div>
+                                    <div class="base-info" slot="content"><div class="base-info-name">Locale:</div><div class="base-info-value">{{info.Base.Locale}}</div></div>
+                                    <div class="base-info" slot="content"><div class="base-info-name">CreateTime:</div><div class="base-info-value">{{info.Base.CreateTime}}</div></div>
+                                </Panel>
+                            </Collapse>
                         </div>
                         <br>
-                        <hr SIZE=15>
-                        <br>
-                        <div> 
-                            <p class="tast-info">TestDays: {{info.Task.TestDays}} </p>
-                            <p class="tast-info">TestTimesPerDay: {{info.Task.TestTimesPerDay}} </p>
-                            <p class="tast-info">FinishTestTimes: {{info.Task.FinishTestTimes}} </p>
-                            <p class="tast-info">LastUpdateTime: {{info.Task.LastUpdateTime}} </p>
-                            <p class="tast-info">Patterns: </p>
-                            <ul id="example-1">
-                                <li v-for="item in info.Task.Patterns">
-                                    {{ item }}
-                                </li>
-                            </ul>
-                        </div>
-                        <br>
-                        <hr SIZE=15>
-                        <br>
-                            <p class="info-second-title"> Under Trigger Result: </p>
-                            <div>
-                                <ul id="example-1">
-                                    <li v-for="item in info.Result.StabilityResults">
-                                       <p class="tast-info">Utterance: {{ item.Utterance }} </p>
-                                       <p class="tast-info">TestTimes: {{ item.TestTimes }} </p>
-                                       <p class="tast-info">PassRate: {{ item.PassRate }} </p>
-                                        <Collapse class="tast-info" v-if="item.PassRate != '1'">
-                                            <Panel name="1">
-                                                FailureRecords
+                        <div>
+                            <Collapse >
+                                <Panel name="2">
+                                    TimedTaskInformation
+                                    <div class="base-info" slot="content"><div class="task-info-name">TestDays:</div><div class="task-info-value">{{info.Task.TestDays}}</div></div>
+                                    <div class="base-info" slot="content"><div class="task-info-name">TestTimesPerDay:</div><div class="task-info-value">{{info.Task.TestTimesPerDay}}</div></div>
+                                    <div class="base-info" slot="content"><div class="task-info-name">FinishTestTimes:</div><div class="task-info-value">{{info.Task.FinishTestTimes}}</div></div>
+                                    <div class="base-info" slot="content"><div class="task-info-name">LastUpdateTime:</div><div class="task-info-value">{{info.Task.LastUpdateTime}}</div></div>
+                                    <div slot="content">
+                                        <Collapse >
+                                            <Panel name="2-1">
+                                                Test Patterns
                                                 <p slot="content">
-                                                    <ul id="example-1">
-                                                        <li v-for="fail in item.FailureDatas">
-                                                            <p class="tast-info">FailTime: {{ fail.FailureTime }} </p>
-                                                            <p class="tast-info">FailReason: {{ fail.FailReason }} </p>
-                                                            <hr style="width:30%">
-                                                        </li>
-                                                    </ul>
+                                                <ul id="example">
+                                                    <li v-for="item in info.Task.Patterns">
+                                                         {{ item }}
+                                                    </li>
+                                                </ul>
                                                 </p>
                                             </Panel>
                                         </Collapse>
-                                        <hr style="width:60%">
-                                    </li>
-                                </ul>
+                                    </div>
+                                </Panel>
+                            </Collapse>
+                        </div>
+                        <br>
+                        <br>
+                            <p class="info-second-title"> Under Trigger Result: </p>
+                            <div>
+                                <trigger-table :data9=triData ></trigger-table>
                             </div>
                     </div>
                     </Col>
@@ -162,18 +167,22 @@
     import comp from '../libs/myunits';
     import util from '../libs/util';
     import Vue from 'vue';
+    import triggerResult from './triggerResultTable.vue'
     Vue.component('my-table', comp.MyComponent);
+    Vue.component('trigger-table', triggerResult);
     export default {
         data() {
             return{
                 lis:true,
                 tableData: [],
+                triData: [],
                 info: {
                     Success: '',
                     Base: {},
                     Task: {},
                     Result: {}
-                }
+                },
+                dic: {}
             }
         },
         created() {
@@ -200,11 +209,17 @@
                 this.tableData = list;
             },
             clickRow(data) {
-                console.info("$$$  "+ JSON.stringify(data))
-                util.getInfo(data.JobId).then((d) => {
-                    console.info(JSON.stringify(d.body));
-                    this.info = d.body;
-                });
+                if(this.dic.hasOwnProperty(data.JobId)){
+                    this.info = this.dic[data.JobId];
+                    this.triData = this.dic[data.JobId].Result.StabilityResults;
+                } else {
+                    util.getInfo(data.JobId).then((d) => {
+                        this.info = d.body;
+                        this.triData = d.body.Result.StabilityResults;
+                        Vue.set(this.dic, data.JobId, d.body);
+                    });
+                }
+
             }
         }
     }
