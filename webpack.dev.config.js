@@ -15,6 +15,11 @@ const SERVER_HOST = {
     changeOrigin: true
 };
 
+const CORP_HOST = {
+    target: 'http://localhost:9010',
+    // changeOrigin: true,
+};
+
 module.exports = merge(webpackBaseConfig, {
     devtool: '#source-map',
     output: {
@@ -39,7 +44,8 @@ module.exports = merge(webpackBaseConfig, {
     ],
     devServer: {
         proxy: {
-            '/api/v1/service': SERVER_HOST
+            '/api/v1/service': SERVER_HOST,
+            '/certification': CORP_HOST
         }
     }
 });
