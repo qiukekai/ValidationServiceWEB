@@ -1,5 +1,9 @@
+import Vue from 'vue';
 import axios from 'axios';
 import env from '../config/env';
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
+
 
 let util = {
 
@@ -22,14 +26,15 @@ var aj = axios.create({
 
 util.base = {
     success(response) {
-        console.log(response)
+        console.log(response);
         return response
     },
     error(err) {
-
+        console.log(err);
+        return err
     },
     get(url, option) {
-        return Vue.http.get(url, option)
+        return Vue.$http.get(url, option)
             .then(this.success, this.error)
     }
 };

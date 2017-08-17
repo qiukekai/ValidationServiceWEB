@@ -6,12 +6,12 @@ let comp = {
 };
 
 comp.MyComponent = Vue.extend({  
-        template: '<Table width="auto" :columns="columns1" :data="data1" @on-row-click="fn"></Table>',
+        template: '<Table highlight-row :columns="columns1" :data="data1" @on-row-click="fn"></Table>',
         props: {
             data1: []
         },
         method: {
-            fn(data) {
+            fn: function(data) {
                 console.info(data)
             }
         },
@@ -69,36 +69,6 @@ comp.MyComponent = Vue.extend({
                                 }, 'Cancle')
                             ]);
                         }
-                    }
-                ],
-                data1: [
-                    {
-                        SkillName: '王小明1',
-                        Status: 0,
-                        FinishTime: 1,
-                        MoreInformation: '...',
-                        Operation: '???'
-                    },
-                    {
-                        SkillName: '王小明2',
-                        Status: 0,
-                        FinishTime: 1,
-                        MoreInformation: '...',
-                        Operation: '???'
-                    },
-                    {
-                        SkillName: '王小明3',
-                        Status: 0,
-                        FinishTime: 1,
-                        MoreInformation: '...',
-                        Operation: '???'
-                    },
-                    {
-                        SkillName: '王小明4',
-                        Status: 0,
-                        FinishTime: 1,
-                        MoreInformation: '...',
-                        Operation: '???'
                     }
                 ]
             }

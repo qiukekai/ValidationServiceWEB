@@ -11,7 +11,7 @@ fs.open('./src/config/env.js', 'w', function(err, fd) {
 });
 
 const SERVER_HOST = {
-    target: 'http://extendcortana',
+    target: 'http://extendcortana.asgfalcon-staging.io',
     changeOrigin: true
 };
 
@@ -39,8 +39,7 @@ module.exports = merge(webpackBaseConfig, {
     ],
     devServer: {
         proxy: {
-            '/api': SERVER_HOST,
-            '/api': SERVER_HOST
+            '/api/v1/service': SERVER_HOST
         }
     }
 });

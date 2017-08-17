@@ -24,10 +24,18 @@
     }
     .layout-content{
         min-height: 1000px;
-        margin: 15px;
+        margin: 15px, 200px;
         overflow: hidden;
         background: #fff;
         border-radius: 4px;
+    }
+    .layout-content-main{
+        padding: 10px;
+    }
+    .layout-copy{
+        text-align: center;
+        padding: 10px 0 20px;
+        color: #9ea7b4;
     }
     .status-column{
          background-color: #2db7f5;
@@ -35,75 +43,58 @@
     }
 </style>
 <template>
-    <div id="nac" class="layout">
+    <div class="layout">
         <Menu mode="horizontal" theme="dark" active-name="1">
             <div class="layout-logo"></div>
-            <div class="layout-nav">
-                <Button name="1" @click="showList" type="text">
+            <div class="layout-nav" id="nac">
+                <Menu-item name="1" @click="showList()">
                     <Icon type="ios-navigate"></Icon>
-                    SkillList
-                </Button>
-                <Button name="2" @click="closeList" type="text">
+                    导航一
+                </Menu-item>
+                <Menu-item name="2" @click="closeList()">
                     <Icon type="ios-keypad"></Icon>
-                    Charts
-                </Button>
+                    导航二
+                </Menu-item>
             </div>
         </Menu>
         <!-- <Menu mode="horizontal" active-name="1">
             <div class="layout-assistant">
                 <Menu-item name="1">二级导航</Menu-item>
-                <Menu-item name=
-                "2">二级导航</Menu-item>
+                <Menu-item name="2">二级导航</Menu-item>
                 <Menu-item name="3">二级导航</Menu-item>
             </div>
         </Menu> -->
         <div class="layout-content">
-            <div v-if="lis">
-                <Row>
-                    <Col span="12">
-                    <my-table></my-table>
-                    </Col>
-                    <Col span="12">col-12</Col>
-                </Row>
-            </div>
+            <Row>
+                <Col span="12">
+                    <my-table v-if="list"></my-table>
+                </Col>
+                <Col span="12">{{child}}</Col>
+            </Row>
+           
         </div>
     </div>
 </template>
 <script>
-    import comp from '../libs/myunits';
-    import util from '../libs/util';
-    import Vue from 'vue';
+    import comp from '../libs/myunits'
+    import Vue from 'vue'
 
-    Vue.component('my-table', comp.MyComponent);
+    Vue.component('my-table', comp.MyComponent); 
 
     export default {
-        created() {
-            util.base.get(" ").then(
-                function(data) {
-                    let arr = [];
-                    arr.filter((item) => {
-                        return item > 3;
-                    });
-                    arr.map((item) => {
-                        return item * 3;
-                    });
-                },
-                function(error) {
-
-                }
-            );
-        },
         data() {
-            return{
-                lis:true
+            return {
+                list:true 
             }
         },
         methods: {
-            showList() {
-                this.lis=true
+            showList: function() {
+                alert("true")
+                this.list=true
             },
-            closeList() {
-                this.lis=false
+            closeList: function() {
+                alert("false")
+                this.list=false
             }
         }
     }
