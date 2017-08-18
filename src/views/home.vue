@@ -21,6 +21,8 @@
         width: 300px;
         margin: 0 auto;
         height: inherit;
+        float: left;
+        margin-left: 100px;
     }
     .layout-content{
         min-height: 1000px;
@@ -70,13 +72,15 @@
         display: inline-block;
         width: 70%;
     }
+    .create-button{
+        float: left;
+        margin-top:16px;
+        margin-left:25px;
+    }
 </style>
 <template>
     <div id="nac" class="layout">
         <Menu mode="horizontal" theme="dark" active-name="1">
-            <div class="layout-logo">
-                AdminTool
-            </div>
             <div class="layout-nav">
                 <Menu-item name="1"type="text">
                     <Icon type="ios-navigate"></Icon>
@@ -89,6 +93,20 @@
             </div>
         </Menu>
          <Menu mode="horizontal" active-name="1" v-if="lis">
+            <Button class="create-button" type="primary" shape="circle" @click="modal1 = true"> Create Job </Button>
+                <Modal
+                    v-model="modal1"
+                    title="Create A Skill test job"
+                    ok-text='Create'
+                    cancel-text='Cancle'
+                    @on-ok="createok"
+                    @on-cancel="createcancle">
+                    <div class="task-info-name">Skill Id:</div> <Input v-model="inputskillid" placeholder="your skill id" style="width: 280px"></Input>
+                    <br>
+                    <div class="task-info-name">Test Days:</div><Input v-model="testDays" placeholder="Test days" style="width: 100px"></Input>
+                    <br>
+                    <div class="task-info-name">TimePerDay:</div><Input v-model="testTimesPerDay" placeholder="Test times per day" style="width: 100px"></Input>
+                </Modal>
             <div class="layout-assistant">
                 <Menu-item name="1">
                     <a class="title-font" @click="active"> Active </a>
@@ -107,7 +125,7 @@
                     </Col>
 
                     <Col span="12">
-                    <div class="info-board">
+                    <div class="info-board" v-if="infoboard">
                         <p class="info-first-title"> Information Board </p>
                         <br>
                         <div>
@@ -117,7 +135,6 @@
                                     <div class="base-info" slot="content"><div class="base-info-name">JobId:</div><div class="base-info-value">{{info.Base.JobId}}</div></div>
                                     <div class="base-info" slot="content"><div class="base-info-name">SkillId:</div><div class="base-info-value">{{info.Base.SkillId}}</div></div>
                                     <div class="base-info" slot="content"><div class="base-info-name">SkillName:</div><div class="base-info-value">{{info.Base.SkillName}}</div></div>
-                                    <div class="base-info" slot="content"><div class="base-info-name">JobId:</div><div class="base-info-value">{{info.Base.JobId}}</div></div>
                                     <div class="base-info" slot="content"><div class="base-info-name">Status:</div><div class="base-info-value">{{info.Base.Status}}</div></div>
                                     <div class="base-info" slot="content"><div class="base-info-name">Locale:</div><div class="base-info-value">{{info.Base.Locale}}</div></div>
                                     <div class="base-info" slot="content"><div class="base-info-name">CreateTime:</div><div class="base-info-value">{{info.Base.CreateTime}}</div></div>
@@ -164,16 +181,21 @@
     </div>
 </template>
 <script>
-    import comp from '../libs/myunits';
     import util from '../libs/util';
     import Vue from 'vue';
     import triggerResult from './triggerResultTable.vue'
-    Vue.component('my-table', comp.MyComponent);
+    import mainTable from './mainTable.vue'
+    Vue.component('my-table', mainTable);
     Vue.component('trigger-table', triggerResult);
     export default {
         data() {
             return{
+                modal1: false,
+                inputskillid: '',
+                testDays: '',
+                testTimesPerDay: '',
                 lis:true,
+                infoboard:false,
                 tableData: [],
                 triData: [],
                 info: {
@@ -190,6 +212,13 @@
             this.tableData = list;
         },
         methods: {
+            createok() {
+                var url = '/api/v1/service/certification/skillId='+this.inputskillid+'&testDays='+this.testDays+'&testTimesPerDay='+this.testTimesPerDay;
+                util.getRequest(url);
+            },
+            createcancle() {
+
+            },
             showList() {
                 this.lis=true
             },
@@ -197,18 +226,22 @@
                 this.lis=false
             },
             active() {
+                this.infoboard=false;
                 var list = util.setList(0);
                 this.tableData = list;
             },
             completed() {
+                this.infoboard=false;
                 var list = util.setList(1);
                 this.tableData = list;
             },
             cancled() {
+                this.infoboard=false;
                 var list = util.setList(2);
                 this.tableData = list;
             },
             clickRow(data) {
+                this.infoboard = true;
                 if(this.dic.hasOwnProperty(data.JobId)){
                     this.info = this.dic[data.JobId];
                     this.triData = this.dic[data.JobId].Result.StabilityResults;

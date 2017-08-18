@@ -2,7 +2,6 @@ import Vue from 'vue';
 // import axios from 'axios';
 import env from '../config/env';
 import VueResource from 'vue-resource'
-import comp from './myunits'
 Vue.use(VueResource);
 
 let util = {
@@ -42,21 +41,15 @@ util.setList = function(stat) {
 };
 
 util.getInfo = function(Id) {
-    // let d = {}
-    // .then(
-    // function(data) {
-    //     if(data.body.Success == true){
-    //         d = data.body;
-    //         console.info("@@@@@@@@@@@  " + JSON.stringify(d))
-    //     } else {
-    //         return {}
-    //     }
-    // },
-    // function(error) {
-    //     console.info('mian.js getInfo error ************** ' + JSON.stringify(error));
-    // });
-
     return Vue.http.post('/certification/GetJobById',{JobId: Id});
 };
+
+util.getRequest = function(url) {
+    Vue.http.get(url).then(
+        function(data){
+            console.info(JSON.stringify(data))
+        }
+    )
+}
 
 export default util;

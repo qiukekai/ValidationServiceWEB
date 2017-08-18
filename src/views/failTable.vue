@@ -1,16 +1,19 @@
 <style scoped>
-    .expand-row{
-        margin-bottom: 16px;
+    .task-info-name-1{
+        display: inline-block;
+        width: 30%;
     }
+    .task-info-value-1 {
+        display: inline-block;
+        width: 70%;
+    }
+</style>
 </style>
 <template>
     <div>
         <ul id="example9">
             <li v-for="item in row">
-                <Row class="expand-row" >
-                    <Col span="6" >{{item.FailureTime}}</Col>
-                    <Col span="18" >{{item.FailReason}}</Col>
-                </Row>
+                <div class="task-info-name-1">{{item.FailureTime}}</div><div class="task-info-value-1">{{item.FailReason}}</div>
             </li>
         </ul>
 

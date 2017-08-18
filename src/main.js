@@ -6,8 +6,6 @@ import Vuex from 'vuex';
 import Util from './libs/util';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
-import comp from './libs/myunits';
-// import VueResource from 'vue-resource'
 
 
 Vue.use(VueRouter);
